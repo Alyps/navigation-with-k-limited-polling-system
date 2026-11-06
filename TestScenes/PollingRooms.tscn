@@ -1,0 +1,293 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://TestScenes/PollingTestLevel.gd" id="1"]
+[ext_resource type="PackedScene" path="res://Objects/Wall/Wall.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://Objects/Camera/ResearchCamera.tscn" id="3"]
+
+[ext_resource type="Script" path="res://Objects/Navigation/PollingLink2D.gd" id="4"]
+
+[sub_resource type="NavigationPolygon" id="Room"]
+vertices = PackedVector2Array(10, 10, 510, 10, 510, 330, 10, 330)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 520, 0, 520, 340, 0, 340)])
+
+[node name="ResearchLevel" type="Node2D"]
+script = ExtResource("1")
+scenario_title = "Four rooms | short passages | k_max = 4"
+
+[node name="Regions" type="Node2D" parent="."]
+
+[node name="Room1" type="NavigationRegion2D" parent="Regions"]
+navigation_polygon = SubResource("Room")
+use_edge_connections = false
+
+[node name="Room2" type="NavigationRegion2D" parent="Regions"]
+position = Vector2(552, 0)
+navigation_polygon = SubResource("Room")
+use_edge_connections = false
+
+[node name="Room3" type="NavigationRegion2D" parent="Regions"]
+position = Vector2(0, 372)
+navigation_polygon = SubResource("Room")
+use_edge_connections = false
+
+[node name="Room4" type="NavigationRegion2D" parent="Regions"]
+position = Vector2(552, 372)
+navigation_polygon = SubResource("Room")
+use_edge_connections = false
+
+[node name="Links" type="Node2D" parent="."]
+
+[node name="Door1" type="NavigationLink2D" parent="Links" node_paths=PackedStringArray("left_slots", "right_slots")]
+script = ExtResource("4")
+start_position = Vector2(509, 170)
+end_position = Vector2(563, 170)
+k_max = 4
+minimum_entry_interval = 0.3
+left_slots = Array[NodePath]([NodePath("Left1"), NodePath("Left2"), NodePath("Left3"), NodePath("Left4"), NodePath("Left5"), NodePath("Left6")])
+right_slots = Array[NodePath]([NodePath("Right1"), NodePath("Right2"), NodePath("Right3"), NodePath("Right4"), NodePath("Right5"), NodePath("Right6")])
+
+[node name="Door2" type="NavigationLink2D" parent="Links" node_paths=PackedStringArray("left_slots", "right_slots")]
+script = ExtResource("4")
+start_position = Vector2(509, 542)
+end_position = Vector2(563, 542)
+k_max = 4
+minimum_entry_interval = 0.3
+left_slots = Array[NodePath]([NodePath("Left1"), NodePath("Left2"), NodePath("Left3"), NodePath("Left4"), NodePath("Left5"), NodePath("Left6")])
+right_slots = Array[NodePath]([NodePath("Right1"), NodePath("Right2"), NodePath("Right3"), NodePath("Right4"), NodePath("Right5"), NodePath("Right6")])
+
+[node name="Door3" type="NavigationLink2D" parent="Links" node_paths=PackedStringArray("left_slots", "right_slots")]
+script = ExtResource("4")
+start_position = Vector2(260, 329)
+end_position = Vector2(260, 383)
+k_max = 4
+minimum_entry_interval = 0.3
+left_slots = Array[NodePath]([NodePath("Left1"), NodePath("Left2"), NodePath("Left3"), NodePath("Left4"), NodePath("Left5"), NodePath("Left6")])
+right_slots = Array[NodePath]([NodePath("Right1"), NodePath("Right2"), NodePath("Right3"), NodePath("Right4"), NodePath("Right5"), NodePath("Right6")])
+
+[node name="Door4" type="NavigationLink2D" parent="Links" node_paths=PackedStringArray("left_slots", "right_slots")]
+script = ExtResource("4")
+start_position = Vector2(812, 329)
+end_position = Vector2(812, 383)
+k_max = 4
+minimum_entry_interval = 0.3
+left_slots = Array[NodePath]([NodePath("Left1"), NodePath("Left2"), NodePath("Left3"), NodePath("Left4"), NodePath("Left5"), NodePath("Left6")])
+right_slots = Array[NodePath]([NodePath("Right1"), NodePath("Right2"), NodePath("Right3"), NodePath("Right4"), NodePath("Right5"), NodePath("Right6")])
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Wall1" parent="Walls" instance=ExtResource("2")]
+position = Vector2(536, -8)
+scale = Vector2(8.625, 0.125)
+
+[node name="Wall2" parent="Walls" instance=ExtResource("2")]
+position = Vector2(536, 720)
+scale = Vector2(8.625, 0.125)
+
+[node name="Wall3" parent="Walls" instance=ExtResource("2")]
+position = Vector2(-8, 356)
+scale = Vector2(0.125, 5.5625)
+
+[node name="Wall4" parent="Walls" instance=ExtResource("2")]
+position = Vector2(1080, 356)
+scale = Vector2(0.125, 5.5625)
+
+[node name="Wall5" parent="Walls" instance=ExtResource("2")]
+position = Vector2(536, 79)
+scale = Vector2(0.25, 1.234375)
+
+[node name="Wall6" parent="Walls" instance=ExtResource("2")]
+position = Vector2(536, 356)
+scale = Vector2(0.25, 2.71875)
+
+[node name="Wall7" parent="Walls" instance=ExtResource("2")]
+position = Vector2(536, 633)
+scale = Vector2(0.25, 1.234375)
+
+[node name="Wall8" parent="Walls" instance=ExtResource("2")]
+position = Vector2(124, 356)
+scale = Vector2(1.9375, 0.25)
+
+[node name="Wall9" parent="Walls" instance=ExtResource("2")]
+position = Vector2(536, 356)
+scale = Vector2(4.125, 0.25)
+
+[node name="Wall10" parent="Walls" instance=ExtResource("2")]
+position = Vector2(948, 356)
+scale = Vector2(1.9375, 0.25)
+
+[node name="Waypoints" type="Node2D" parent="."]
+
+[node name="Point1" type="Marker2D" parent="Waypoints"]
+position = Vector2(32, 64)
+
+[node name="Point2" type="Marker2D" parent="Waypoints"]
+position = Vector2(64, 32)
+
+[node name="Point3" type="Marker2D" parent="Waypoints"]
+position = Vector2(1008, 32)
+
+[node name="Point4" type="Marker2D" parent="Waypoints"]
+position = Vector2(1040, 64)
+
+[node name="Point5" type="Marker2D" parent="Waypoints"]
+position = Vector2(32, 648)
+
+[node name="Point6" type="Marker2D" parent="Waypoints"]
+position = Vector2(64, 680)
+
+[node name="Point7" type="Marker2D" parent="Waypoints"]
+position = Vector2(1008, 680)
+
+[node name="Point8" type="Marker2D" parent="Waypoints"]
+position = Vector2(1040, 648)
+
+[node name="Agents" type="Node2D" parent="."]
+
+[node name="ResearchCamera" parent="." instance=ExtResource("3")]
+position = Vector2(536, 356)
+zoom = Vector2(0.83, 0.83)
+
+[node name="Left1" type="Marker2D" parent="Links/Door1"]
+position = Vector2(461, 210)
+
+[node name="Left2" type="Marker2D" parent="Links/Door1"]
+position = Vector2(435, 210)
+
+[node name="Left3" type="Marker2D" parent="Links/Door1"]
+position = Vector2(409, 210)
+
+[node name="Left4" type="Marker2D" parent="Links/Door1"]
+position = Vector2(383, 210)
+
+[node name="Left5" type="Marker2D" parent="Links/Door1"]
+position = Vector2(357, 210)
+
+[node name="Left6" type="Marker2D" parent="Links/Door1"]
+position = Vector2(331, 210)
+
+[node name="Right1" type="Marker2D" parent="Links/Door1"]
+position = Vector2(611, 130)
+
+[node name="Right2" type="Marker2D" parent="Links/Door1"]
+position = Vector2(637, 130)
+
+[node name="Right3" type="Marker2D" parent="Links/Door1"]
+position = Vector2(663, 130)
+
+[node name="Right4" type="Marker2D" parent="Links/Door1"]
+position = Vector2(689, 130)
+
+[node name="Right5" type="Marker2D" parent="Links/Door1"]
+position = Vector2(715, 130)
+
+[node name="Right6" type="Marker2D" parent="Links/Door1"]
+position = Vector2(741, 130)
+
+[node name="Left1" type="Marker2D" parent="Links/Door2"]
+position = Vector2(461, 582)
+
+[node name="Left2" type="Marker2D" parent="Links/Door2"]
+position = Vector2(435, 582)
+
+[node name="Left3" type="Marker2D" parent="Links/Door2"]
+position = Vector2(409, 582)
+
+[node name="Left4" type="Marker2D" parent="Links/Door2"]
+position = Vector2(383, 582)
+
+[node name="Left5" type="Marker2D" parent="Links/Door2"]
+position = Vector2(357, 582)
+
+[node name="Left6" type="Marker2D" parent="Links/Door2"]
+position = Vector2(331, 582)
+
+[node name="Right1" type="Marker2D" parent="Links/Door2"]
+position = Vector2(611, 502)
+
+[node name="Right2" type="Marker2D" parent="Links/Door2"]
+position = Vector2(637, 502)
+
+[node name="Right3" type="Marker2D" parent="Links/Door2"]
+position = Vector2(663, 502)
+
+[node name="Right4" type="Marker2D" parent="Links/Door2"]
+position = Vector2(689, 502)
+
+[node name="Right5" type="Marker2D" parent="Links/Door2"]
+position = Vector2(715, 502)
+
+[node name="Right6" type="Marker2D" parent="Links/Door2"]
+position = Vector2(741, 502)
+
+[node name="Left1" type="Marker2D" parent="Links/Door3"]
+position = Vector2(220, 281)
+
+[node name="Left2" type="Marker2D" parent="Links/Door3"]
+position = Vector2(220, 255)
+
+[node name="Left3" type="Marker2D" parent="Links/Door3"]
+position = Vector2(220, 229)
+
+[node name="Left4" type="Marker2D" parent="Links/Door3"]
+position = Vector2(220, 203)
+
+[node name="Left5" type="Marker2D" parent="Links/Door3"]
+position = Vector2(220, 177)
+
+[node name="Left6" type="Marker2D" parent="Links/Door3"]
+position = Vector2(220, 151)
+
+[node name="Right1" type="Marker2D" parent="Links/Door3"]
+position = Vector2(300, 431)
+
+[node name="Right2" type="Marker2D" parent="Links/Door3"]
+position = Vector2(300, 457)
+
+[node name="Right3" type="Marker2D" parent="Links/Door3"]
+position = Vector2(300, 483)
+
+[node name="Right4" type="Marker2D" parent="Links/Door3"]
+position = Vector2(300, 509)
+
+[node name="Right5" type="Marker2D" parent="Links/Door3"]
+position = Vector2(300, 535)
+
+[node name="Right6" type="Marker2D" parent="Links/Door3"]
+position = Vector2(300, 561)
+
+[node name="Left1" type="Marker2D" parent="Links/Door4"]
+position = Vector2(772, 281)
+
+[node name="Left2" type="Marker2D" parent="Links/Door4"]
+position = Vector2(772, 255)
+
+[node name="Left3" type="Marker2D" parent="Links/Door4"]
+position = Vector2(772, 229)
+
+[node name="Left4" type="Marker2D" parent="Links/Door4"]
+position = Vector2(772, 203)
+
+[node name="Left5" type="Marker2D" parent="Links/Door4"]
+position = Vector2(772, 177)
+
+[node name="Left6" type="Marker2D" parent="Links/Door4"]
+position = Vector2(772, 151)
+
+[node name="Right1" type="Marker2D" parent="Links/Door4"]
+position = Vector2(852, 431)
+
+[node name="Right2" type="Marker2D" parent="Links/Door4"]
+position = Vector2(852, 457)
+
+[node name="Right3" type="Marker2D" parent="Links/Door4"]
+position = Vector2(852, 483)
+
+[node name="Right4" type="Marker2D" parent="Links/Door4"]
+position = Vector2(852, 509)
+
+[node name="Right5" type="Marker2D" parent="Links/Door4"]
+position = Vector2(852, 535)
+
+[node name="Right6" type="Marker2D" parent="Links/Door4"]
+position = Vector2(852, 561)
