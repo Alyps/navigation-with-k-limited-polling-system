@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://dnaampunsasq3"]
+
+[ext_resource type="Script" uid="uid://24p68y2uludd" path="res://ResearchLevel.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://tbsng7cs1k8g" path="res://Objects/Wall/Wall.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://Objects/Camera/ResearchCamera.tscn" id="3"]
+
+[sub_resource type="NavigationPolygon" id="Room"]
+vertices = PackedVector2Array(10, 10, 510, 10, 510, 330, 10, 330)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 520, 0, 520, 340, 0, 340)])
+
+[node name="ResearchLevel" type="Node2D" unique_id=131339698]
+script = ExtResource("1")
+agent_count = 50
+
+[node name="Regions" type="Node2D" parent="." unique_id=1484487417]
+
+[node name="Room1" type="NavigationRegion2D" parent="Regions" unique_id=966577033]
+navigation_polygon = SubResource("Room")
+use_edge_connections = false
+
+[node name="Room2" type="NavigationRegion2D" parent="Regions" unique_id=591256987]
+position = Vector2(552, 0)
+navigation_polygon = SubResource("Room")
+use_edge_connections = false
+
+[node name="Room3" type="NavigationRegion2D" parent="Regions" unique_id=506173496]
+position = Vector2(0, 372)
+navigation_polygon = SubResource("Room")
+use_edge_connections = false
+
+[node name="Room4" type="NavigationRegion2D" parent="Regions" unique_id=1224970351]
+position = Vector2(552, 372)
+navigation_polygon = SubResource("Room")
+use_edge_connections = false
+
+[node name="Links" type="Node2D" parent="." unique_id=786105767]
+
+[node name="Door1" type="NavigationLink2D" parent="Links" unique_id=1059006835]
+start_position = Vector2(509, 170)
+end_position = Vector2(563, 170)
+
+[node name="Door2" type="NavigationLink2D" parent="Links" unique_id=1298673462]
+start_position = Vector2(509, 542)
+end_position = Vector2(563, 542)
+
+[node name="Door3" type="NavigationLink2D" parent="Links" unique_id=2008396090]
+start_position = Vector2(260, 329)
+end_position = Vector2(260, 383)
+
+[node name="Door4" type="NavigationLink2D" parent="Links" unique_id=1243944989]
+start_position = Vector2(812, 329)
+end_position = Vector2(812, 383)
+
+[node name="Walls" type="Node2D" parent="." unique_id=254984561]
+
+[node name="Wall1" parent="Walls" unique_id=547392819 instance=ExtResource("2")]
+position = Vector2(536, -8)
+scale = Vector2(8.625, 0.125)
+
+[node name="Wall2" parent="Walls" unique_id=1955527429 instance=ExtResource("2")]
+position = Vector2(536, 720)
+scale = Vector2(8.625, 0.125)
+
+[node name="Wall3" parent="Walls" unique_id=992879936 instance=ExtResource("2")]
+position = Vector2(-8, 356)
+scale = Vector2(0.125, 5.5625)
+
+[node name="Wall4" parent="Walls" unique_id=149140038 instance=ExtResource("2")]
+position = Vector2(1080, 356)
+scale = Vector2(0.125, 5.5625)
+
+[node name="Wall5" parent="Walls" unique_id=925653935 instance=ExtResource("2")]
+position = Vector2(536, 79)
+scale = Vector2(0.25, 1.234375)
+
+[node name="Wall6" parent="Walls" unique_id=30314330 instance=ExtResource("2")]
+position = Vector2(536, 356)
+scale = Vector2(0.25, 2.71875)
+
+[node name="Wall7" parent="Walls" unique_id=1408219673 instance=ExtResource("2")]
+position = Vector2(536, 633)
+scale = Vector2(0.25, 1.234375)
+
+[node name="Wall8" parent="Walls" unique_id=49991250 instance=ExtResource("2")]
+position = Vector2(124, 356)
+scale = Vector2(1.9375, 0.25)
+
+[node name="Wall9" parent="Walls" unique_id=1745753106 instance=ExtResource("2")]
+position = Vector2(536, 356)
+scale = Vector2(4.125, 0.25)
+
+[node name="Wall10" parent="Walls" unique_id=526978578 instance=ExtResource("2")]
+position = Vector2(948, 356)
+scale = Vector2(1.9375, 0.25)
+
+[node name="Waypoints" type="Node2D" parent="." unique_id=753375493]
+
+[node name="Point1" type="Marker2D" parent="Waypoints" unique_id=1562655990]
+position = Vector2(32, 64)
+
+[node name="Point2" type="Marker2D" parent="Waypoints" unique_id=1616724017]
+position = Vector2(64, 32)
+
+[node name="Point3" type="Marker2D" parent="Waypoints" unique_id=516495077]
+position = Vector2(1008, 32)
+
+[node name="Point4" type="Marker2D" parent="Waypoints" unique_id=1933665271]
+position = Vector2(1040, 64)
+
+[node name="Point5" type="Marker2D" parent="Waypoints" unique_id=108884763]
+position = Vector2(32, 648)
+
+[node name="Point6" type="Marker2D" parent="Waypoints" unique_id=1022659064]
+position = Vector2(64, 680)
+
+[node name="Point7" type="Marker2D" parent="Waypoints" unique_id=601109549]
+position = Vector2(1008, 680)
+
+[node name="Point8" type="Marker2D" parent="Waypoints" unique_id=410390292]
+position = Vector2(1040, 648)
+
+[node name="Agents" type="Node2D" parent="." unique_id=1990439430]
+
+[node name="ResearchCamera" parent="." unique_id=1462009274 instance=ExtResource("3")]
+position = Vector2(536, 356)
+zoom = Vector2(0.83, 0.83)

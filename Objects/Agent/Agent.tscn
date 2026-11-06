@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dilpli07g502"]
+
+[ext_resource type="Script" uid="uid://dv0u0so72n4y8" path="res://Objects/Agent/Agent.gd" id="1"]
+
+[sub_resource type="CircleShape2D" id="Body"]
+radius = 8.0
+
+[node name="Agent" type="CharacterBody2D" unique_id=1162229547]
+collision_layer = 2
+script = ExtResource("1")
+speed = 30000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1880955747]
+shape = SubResource("Body")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=491081888]
+path_desired_distance = 6.0
+target_desired_distance = 9.0
+avoidance_enabled = true
+radius = 8.0
+neighbor_distance = 70.0
+time_horizon_agents = 0.8
+max_speed = 82.0

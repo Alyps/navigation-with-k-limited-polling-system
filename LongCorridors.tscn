@@ -1,0 +1,96 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://ResearchLevel.gd" id="1"]
+[ext_resource type="PackedScene" path="res://Objects/Wall/Wall.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://Objects/Camera/ResearchCamera.tscn" id="3"]
+
+[sub_resource type="NavigationPolygon" id="Room"]
+vertices = PackedVector2Array(10, 10, 510, 10, 510, 330, 10, 330)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 520, 0, 520, 340, 0, 340)])
+
+[node name="LongCorridors" type="Node2D"]
+script = ExtResource("1")
+
+[node name="Regions" type="Node2D" parent="."]
+
+[node name="LeftRoom" type="NavigationRegion2D" parent="Regions"]
+navigation_polygon = SubResource("Room")
+use_edge_connections = false
+
+[node name="RightRoom" type="NavigationRegion2D" parent="Regions"]
+position = Vector2(920, 0)
+navigation_polygon = SubResource("Room")
+use_edge_connections = false
+
+[node name="Links" type="Node2D" parent="."]
+
+[node name="Upper" type="NavigationLink2D" parent="Links"]
+start_position = Vector2(506, 80)
+end_position = Vector2(934, 80)
+
+[node name="Lower" type="NavigationLink2D" parent="Links"]
+start_position = Vector2(506, 260)
+end_position = Vector2(934, 260)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="North" parent="Walls" instance=ExtResource("2")]
+position = Vector2(720, -8)
+scale = Vector2(11.5, 0.125)
+
+[node name="South" parent="Walls" instance=ExtResource("2")]
+position = Vector2(720, 348)
+scale = Vector2(11.5, 0.125)
+
+[node name="West" parent="Walls" instance=ExtResource("2")]
+position = Vector2(-8, 170)
+scale = Vector2(0.125, 2.65625)
+
+[node name="East" parent="Walls" instance=ExtResource("2")]
+position = Vector2(1448, 170)
+scale = Vector2(0.125, 2.65625)
+
+[node name="UpperBank" parent="Walls" instance=ExtResource("2")]
+position = Vector2(720, 34)
+scale = Vector2(3.125, 0.53125)
+
+[node name="Divider" parent="Walls" instance=ExtResource("2")]
+position = Vector2(720, 170)
+scale = Vector2(3.125, 1.21875)
+
+[node name="LowerBank" parent="Walls" instance=ExtResource("2")]
+position = Vector2(720, 306)
+scale = Vector2(3.125, 0.53125)
+
+[node name="Waypoints" type="Node2D" parent="."]
+
+[node name="Point1" type="Marker2D" parent="Waypoints"]
+position = Vector2(32, 64)
+
+[node name="Point2" type="Marker2D" parent="Waypoints"]
+position = Vector2(64, 32)
+
+[node name="Point3" type="Marker2D" parent="Waypoints"]
+position = Vector2(32, 276)
+
+[node name="Point4" type="Marker2D" parent="Waypoints"]
+position = Vector2(64, 308)
+
+[node name="Point5" type="Marker2D" parent="Waypoints"]
+position = Vector2(1408, 64)
+
+[node name="Point6" type="Marker2D" parent="Waypoints"]
+position = Vector2(1376, 32)
+
+[node name="Point7" type="Marker2D" parent="Waypoints"]
+position = Vector2(1408, 276)
+
+[node name="Point8" type="Marker2D" parent="Waypoints"]
+position = Vector2(1376, 308)
+
+[node name="Agents" type="Node2D" parent="."]
+
+[node name="ResearchCamera" parent="." instance=ExtResource("3")]
+position = Vector2(720, 170)
+zoom = Vector2(0.75, 0.75)
